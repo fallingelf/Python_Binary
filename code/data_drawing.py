@@ -15,7 +15,8 @@ from scipy import interpolate
 
 
 def data_save_draw(flag):    #flag指定历元数组
-    file_list = os.listdir('C:\\Users\\falli\\Desktop\\meterial\\MNHya\\Python_deal\\data_all')
+    filedir="C:\\Users\\falli\\Desktop\\meterial\\MNHya\\Data_Deal_Python\\Python_In\\data_all"
+    file_list = os.listdir(filedir)
     data_all = []  # [0]为约化的HJD，[1]为相位,[2]较差星等
     for i in range(len(file_list)):
         data_all.append([])
@@ -38,7 +39,7 @@ def data_save_draw(flag):    #flag指定历元数组
         i = 0
         for file in file_list:
             #      if file[len(file)-5] is not 'V':
-            data = np.loadtxt('data_all\\' + file)  # 直接读取txt文件中的数组
+            data = np.loadtxt(filedir +'\\'+ file)  # 直接读取txt文件中的数组
             data_name.append(file[0:len(file) - 4])
             data_all[i][0] = np.transpose(data)[0]  # reduced HJD
             data_all[i][1] = (data_all[i][0] + pre_HJD[i] - Epoch) / Period % 1  # 相位
@@ -147,7 +148,7 @@ if __name__=='__main__':
         Mag_Phase_plot(data_linear[i][0],data_linear[i][1],line_mode=line_mode[i],line_text=data_name[i],position_index=np.array([i,len(data_name)-6,0.3]))
     plt.gca().invert_yaxis()
     plt.gcf().set_size_inches(37, 21)
-    plt.savefig('data_drawing', dpi=400)  # 设置保存图像精度
+    plt.savefig('C:\\Users\\falli\\Desktop\\meterial\\MNHya\\Data_Deal_Python\\Python_Out\\data_drawing', dpi=400)  # 设置保存图像精度
 
     data_arrange=Rearrange(data_linear,len(data_name),N=Num)
 
@@ -156,7 +157,7 @@ if __name__=='__main__':
     meaning_phase= np.linspace(0.5, 1.5, Num + 1)[np.array([i for i in range(len(meaning_mag)) if meaning_mag[i] is not None])]
     plt.plot(meaning_phase,meaning_mag,'k-')
 
-    file_in = open('data_drawing.txt', 'w+')
+    file_in = open('C:\\Users\\falli\\Desktop\\meterial\\MNHya\\Data_Deal_Python\\Python_Out\\data_drawing.txt', 'w+')
     file_in.write(str(data_arrange))
     file_in.close()
 

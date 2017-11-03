@@ -100,14 +100,17 @@ plt.plot(cycles,OC_linearfit,'r*')
 plt.plot(cycles,np.zeros(len(cycles)),'k-')
 plt.xlabel('cycles')
 plt.ylabel('O-C')
-plt.savefig('O-C')
+
 #plt.show()
 
-file_in=open('fit_result.txt','a+')
-setting_txt='fit_leastsq'+'\n'
+filedir = 'C:\\Users\\falli\\Desktop\\meterial\\MNHya\\Data_Deal_Python\\Python_Out'
+file_in=open(filedir+'\\'+'fit_result.txt','a+')
+illustr_txt='fit_leastsq'+'\n'
 linear_fit_txt='linear_fit:' + '\t' + str(pfit_linear) + '\t' +  str(perr_linear)  + '\t' + str(COD_linear) + '\n'
 quadr_fit_txt= 'quadr_fit:'  + '\t' + str(pfit_quadr)  + '\t' +  str(perr_quadr)   + '\t' + str(COD_quadr)  + '\n'
-file_in.write(setting_txt)
+file_in.write(illustr_txt)
 file_in.write(linear_fit_txt)
 file_in.write(quadr_fit_txt)
 file_in.close()
+plt.savefig(filedir+'\\'+'fit_leastsq_O-C')
+
